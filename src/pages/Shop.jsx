@@ -15,16 +15,16 @@ const Shop = () => {
 
   return (
     <Fragment>
-      <Banner title="product" />
+      {/* <Banner title="product" /> */}
       <section className="filter-bar">
         <Container className="filter-bar-contianer">
           <Row className="justify-content-center">
-            <Col md={4}>
+            <Col md={4} className="justify-content-center">
               <FilterSelect setFilterList={setFilterList} />
             </Col>
-            <Col md={8}>
+            {/* <Col md={8}>
               <SearchBar setFilterList={setFilterList} />
-            </Col>
+            </Col> */}
           </Row>
         </Container>
         <Container>

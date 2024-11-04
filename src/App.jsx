@@ -1,15 +1,16 @@
 import { lazy, Suspense } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Product = lazy(() => import("./pages/Product"));
+
 function App() {
   return (
     <Suspense fallback={<Loader />}>
