@@ -14,33 +14,25 @@ const ProductDetails = ({ selectedProduct }) => {
   };
   const handelAdd = (selectedProduct, quantity) => {
     dispatch(addToCart({ product: selectedProduct, num: quantity }));
-    toast.success("Product has been added to cart!");
+    toast.success("El producto ha sido añadido al carrito.");
   };
 
+  console.log(selectedProduct);
   return (
     <section className="product-page">
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <img loading="lazy" src={selectedProduct?.imgUrl} alt="" />
+            <img loading="lazy" src={selectedProduct?.img} alt="" />
           </Col>
           <Col md={6}>
             <h2>{selectedProduct?.productName}</h2>
-            <div className="rate">
-              <div className="stars">
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-                <i className="fa fa-star"></i>
-              </div>
-              <span>{selectedProduct?.avgRating} ratings</span>
-            </div>
+
             <div className="info">
               <span className="price">${selectedProduct?.price}</span>
-              <span>category:{selectedProduct?.category}</span>
+              {/* <span>Categoria: {selectedProduct?.category}</span> */}
             </div>
-            <p>{selectedProduct?.shortDesc}</p>
+            <p>{selectedProduct?.description}</p>
             <input
               className="qty-input"
               type="number"
@@ -54,7 +46,7 @@ const ProductDetails = ({ selectedProduct }) => {
               className="add"
               onClick={() => handelAdd(selectedProduct, quantity)}
             >
-              Add To Cart
+              Agregar al carrito
             </button>
           </Col>
         </Row>
