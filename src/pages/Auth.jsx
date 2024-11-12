@@ -13,12 +13,14 @@ import {
 } from "mdb-react-ui-kit";
 import { login, register } from "../app/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Auth() {
   const [formType, setFormType] = useState("login");
   const loginRef = useRef();
   const signUpRef = useRef();
+  const navigate = useNavigate();
+  const [redirect, setRedirect] = useState(false);
 
   const dispatch = useDispatch();
   const authSelector = useSelector((state) => state.auth);
@@ -31,13 +33,6 @@ function Auth() {
     setFormType(value);
   };
 
-  useEffect(() => {
-    // console.log("token", authSelector.token);
-    const token = authSelector.token;
-    console.log("token", token);
-    localStorage.setItem("authToken", token);
-  }, [authSelector.status]);
-
   function loginSubmit(e) {
     e.preventDefault();
     const formData = new FormData(loginRef.current);
@@ -48,6 +43,7 @@ function Auth() {
       password: values.password,
     };
     dispatch(login(data));
+    navigate("/");
   }
 
   function signUpSubmit(e) {

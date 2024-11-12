@@ -65,7 +65,6 @@ const FilterSelect = ({ setFilterList }) => {
     setOptions(cambios);
   }, []);
 
-  console.log("options", option);
   return (
     <Select
       options={option}

@@ -3,12 +3,11 @@ import FilterSelect from "../components/FilterSelect";
 import SearchBar from "../components/SeachBar/SearchBar";
 import { Fragment, useState, useEffect } from "react";
 // import { products } from "../utils/products";
-import ShopList from "../components/ShopList";
 import Banner from "../components/Banner/Banner";
 import useWindowScrollToTop from "../hooks/useWindowScrollToTop";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../app/actions/productActions";
-
+import ProductCard from "../components/ProductCard/ProductCard";
 const Shop = () => {
   // const [filterList, setFilterList] = useState(
   //   products.filter((item) => item.category === "sofa")
@@ -17,14 +16,17 @@ const Shop = () => {
 
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
-  const { status, data } = useSelector((state) => state.product);
+  const { status_list_products, list_products } = useSelector(
+    (state) => state.product
+  );
 
   useEffect(() => {
-    if (status === "idle") {
+    if (status_list_products === "idle") {
       dispatch(getProducts());
     }
-    setProducts(data);
-  }, [status, dispatch]);
+    console.log("shop componente", list_products);
+    setProducts(list_products);
+  }, [status_list_products, dispatch]);
   return (
     <Fragment>
       {/* <Banner title="product" /> */}
@@ -38,7 +40,18 @@ const Shop = () => {
           </Row>
         </Container>
         <Container>
-          <ShopList productItems={products} />
+          <Row className="justify-content-center">
+            {products.map((productItem) => {
+              return (
+                <ProductCard
+                  key={productItem.productId}
+                  title={null}
+                  productId={productItem.productId}
+                  productItem={productItem}
+                />
+              );
+            })}
+          </Row>
         </Container>
       </section>
     </Fragment>

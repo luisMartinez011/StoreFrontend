@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getProducts,getProductById } from '../actions/productActions';
 const initialState = {
-  data: [],
+  list_products: [],
+  product:{},
   loading: false,
   error: null,
-  status: 'idle',
+  status_list_products: 'idle',
+  status_product: 'idle'
 };
 
 const productSlice = createSlice({
@@ -16,28 +18,28 @@ const productSlice = createSlice({
     extraReducers: (builder) => {
     builder
       .addCase(getProducts.pending, (state) => {
-        state.status = 'loading';
+        state.status_list_products = 'loading';
       })
       .addCase(getProducts.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-    console.log(action.payload)
+        state.status_list_products = 'succeeded';
 
-        state.data = action.payload;
+        state.list_products = action.payload;
       })
       .addCase(getProducts.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status_list_products = 'failed';
         state.error = action.error.message;
       })
       .addCase(getProductById.pending, (state) => {
-        state.status = 'loading';
+        state.status_product = 'loading';
       })
       .addCase(getProductById.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        console.log('llamandoo')
+        state.status_product = 'succeeded';
 
-        state.data = action.payload;
+        state.product = action.payload;
       })
       .addCase(getProductById.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status_product = 'failed';
         state.error = action.error.message;
       })
       ;

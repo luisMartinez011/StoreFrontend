@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { login, register } from '../actions/authActions';
 
 const initialState = {
-  token: '',
+  data:{},
   loading: false,
   error: null,
   status: false,
@@ -21,7 +21,12 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.status = true;
-        state.token = action.payload;
+        state.data = action.payload;
+
+        const token = action.payload.token;
+        const userName = action.payload.name;
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("userName", userName);
       })
       .addCase(register.rejected, (state, action) => {
         state.status = false;
@@ -33,7 +38,11 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = true;
-        state.token = action.payload;
+        state.data = action.payload;
+        const token = action.payload.token;
+        const userName = action.payload.name;
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("userName", userName);
       })
       .addCase(login.rejected, (state, action) => {
         state.status = false;

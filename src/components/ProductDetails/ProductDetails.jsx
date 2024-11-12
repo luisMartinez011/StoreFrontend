@@ -17,7 +17,6 @@ const ProductDetails = ({ selectedProduct }) => {
     toast.success("El producto ha sido añadido al carrito.");
   };
 
-  console.log(selectedProduct);
   return (
     <section className="product-page">
       <Container>

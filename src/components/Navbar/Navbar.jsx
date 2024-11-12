@@ -7,6 +7,7 @@ const NavBar = () => {
   const { cartList } = useSelector((state) => state.cart);
   const [expand, setExpand] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
+  const [userName, setUserName] = useState("aa");
   // fixed Header
   function scrollHandler() {
     if (window.scrollY >= 100) {
@@ -22,6 +23,15 @@ const NavBar = () => {
   //     setCartItem(JSON.parse(storedCart));
   //   }
   // },[])
+
+  useEffect(() => {
+    const username = localStorage.getItem("userName");
+    if (username !== null) {
+      setUserName(username);
+    } else {
+      setUserName("aaa");
+    }
+  }, []);
   return (
     <Navbar
       fixed="top"
@@ -110,6 +120,9 @@ const NavBar = () => {
               </Link>
             </Nav.Item>
             <Nav.Item>
+              <span className="fs-6 pb-2">
+                {userName !== undefined ? userName : ""}
+              </span>
               <Link
                 aria-label="Go to User Profile"
                 className="navbar-link"

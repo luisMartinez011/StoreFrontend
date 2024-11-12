@@ -9,24 +9,24 @@ import { getProductById } from "../app/actions/productActions";
 const Product = () => {
   const { id } = useParams();
 
-  const [product, setProduct] = useState();
+  const [productDetails, setProductDetails] = useState();
   const dispatch = useDispatch();
-  const { status, data } = useSelector((state) => state.product);
+  const { status_product, product } = useSelector((state) => state.product);
 
   useEffect(() => {
-    if (status === "idle") {
+    if (status_product === "idle") {
       dispatch(getProductById(id));
     }
-    console.log(data);
-    setProduct(data);
-  }, [status, dispatch]);
+    console.log("product component", status);
+    setProductDetails(product);
+  }, [status_product, dispatch]);
 
   useWindowScrollToTop();
 
   return (
     <Fragment>
-      <Banner title={product?.title} />
-      <ProductDetails selectedProduct={product} />{" "}
+      <Banner title={productDetails?.title} />
+      <ProductDetails selectedProduct={productDetails} />{" "}
     </Fragment>
   );
 };
