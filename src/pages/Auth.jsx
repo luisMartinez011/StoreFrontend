@@ -20,7 +20,6 @@ function Auth() {
   const loginRef = useRef();
   const signUpRef = useRef();
   const navigate = useNavigate();
-  const [redirect, setRedirect] = useState(false);
 
   const dispatch = useDispatch();
   const authSelector = useSelector((state) => state.auth);

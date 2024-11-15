@@ -17,7 +17,6 @@ const Product = () => {
     if (status_product === "idle") {
       dispatch(getProductById(id));
     }
-    console.log("product component", status);
     setProductDetails(product);
   }, [status_product, dispatch]);
 

@@ -28,9 +28,6 @@ const NavBar = () => {
     }
   }, []);
 
-  console.log("User name", userName);
-  console.log("condition", !userName);
-
   // ?Link to Auth Page
   function LinkToAuth() {
     return (

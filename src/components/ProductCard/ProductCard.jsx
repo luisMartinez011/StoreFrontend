@@ -9,18 +9,6 @@ const ProductCard = ({ productId, title, productItem }) => {
   const dispatch = useDispatch();
   const router = useNavigate();
 
-  // const [product, setProduct] = useState();
-  // const { status, data } = useSelector((state) => state.product);
-
-  // useEffect(() => {
-  //   if (status === "idle") {
-  //     dispatch(getProductById(productId));
-  //   }
-  //   console.log("Product id", productId);
-  //   console.log("product by id", data);
-  //   setProduct(data);
-  // }, [status, dispatch]);
-
   const handelClick = () => {
     router(`/shop/${productItem.productId}`);
   };

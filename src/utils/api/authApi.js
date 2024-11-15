@@ -16,11 +16,6 @@ const login = async (email,password) => {
   )
   .then(response => {
     const data = response.data;
-    // const token = data.token;
-    // const userName = data.name;
-    // console.log(data);
-    // localStorage.setItem("authToken", token);
-    // localStorage.setItem("userName", userName);
     return response.data;
   })
   .catch(error => {

@@ -24,7 +24,6 @@ const Shop = () => {
     if (status_list_products === "idle") {
       dispatch(getProducts());
     }
-    console.log("shop componente", list_products);
     setProducts(list_products);
   }, [status_list_products, dispatch]);
   return (

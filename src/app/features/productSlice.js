@@ -33,7 +33,6 @@ const productSlice = createSlice({
         state.status_product = 'loading';
       })
       .addCase(getProductById.fulfilled, (state, action) => {
-        console.log('llamandoo')
         state.status_product = 'succeeded';
 
         state.product = action.payload;
