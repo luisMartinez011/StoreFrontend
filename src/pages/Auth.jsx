@@ -25,6 +25,12 @@ function Auth() {
   const dispatch = useDispatch();
   const authSelector = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    if (authSelector.status === true) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [authSelector.status]);
   const handleJustifyClick = (value) => {
     if (value === formType) {
       return;
@@ -43,7 +49,6 @@ function Auth() {
       password: values.password,
     };
     dispatch(login(data));
-    navigate("/");
   }
 
   function signUpSubmit(e) {

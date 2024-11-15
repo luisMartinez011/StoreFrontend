@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Dropdown from "react-bootstrap/Dropdown";
+
 const NavBar = () => {
   const { cartList } = useSelector((state) => state.cart);
   const [expand, setExpand] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
-  const [userName, setUserName] = useState("aa");
-  // fixed Header
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
+
   function scrollHandler() {
     if (window.scrollY >= 100) {
       setIsFixed(true);
@@ -17,21 +20,73 @@ const NavBar = () => {
     }
   }
   window.addEventListener("scroll", scrollHandler);
-  // useEffect(()=> {
-  //   if(CartItem.length ===0) {
-  //     const storedCart = localStorage.getItem("cartItem");
-  //     setCartItem(JSON.parse(storedCart));
-  //   }
-  // },[])
 
   useEffect(() => {
     const username = localStorage.getItem("userName");
-    if (username !== null) {
+    if (username) {
       setUserName(username);
-    } else {
-      setUserName("aaa");
     }
   }, []);
+
+  console.log("User name", userName);
+  console.log("condition", !userName);
+
+  // ?Link to Auth Page
+  function LinkToAuth() {
+    return (
+      <Link
+        aria-label="Go to User Profile"
+        className="navbar-link"
+        to="/auth"
+        onClick={() => setExpand(false)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="black"
+          className="nav-icon"
+        >
+          <path
+            fillRule="evenodd"
+            d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </Link>
+    );
+  }
+
+  // ?Function to LogOut
+  function LogOutComponent() {
+    return (
+      <Dropdown>
+        <Dropdown.Toggle variant="none">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="black"
+            className="nav-icon"
+          >
+            <path
+              fillRule="evenodd"
+              d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item onClick={LogOut}>LogOut</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+  }
+
+  function LogOut() {
+    localStorage.clear();
+    window.location.reload();
+    navigate("/");
+  }
   return (
     <Navbar
       fixed="top"
@@ -119,29 +174,10 @@ const NavBar = () => {
                 <span className="nav-link-label">Carrito</span>
               </Link>
             </Nav.Item>
+            {/* ! Usuarios */}
             <Nav.Item>
-              <span className="fs-6 pb-2">
-                {userName !== undefined ? userName : ""}
-              </span>
-              <Link
-                aria-label="Go to User Profile"
-                className="navbar-link"
-                to="/auth"
-                onClick={() => setExpand(false)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="black"
-                  className="nav-icon"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
+              <span className="fs-6 pb-2">{!userName ? "" : userName}</span>
+              {!userName ? LinkToAuth() : LogOutComponent()}
             </Nav.Item>
             <Nav.Item className="expanded-cart">
               <Link
