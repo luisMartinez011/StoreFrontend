@@ -12,10 +12,12 @@ const Product = () => {
   const [productDetails, setProductDetails] = useState();
   const dispatch = useDispatch();
   const { status_product, product } = useSelector((state) => state.product);
+  const [loadProduct, setLoadProduct] = useState(false);
 
   useEffect(() => {
-    if (status_product === "idle") {
+    if (status_product === "idle" || loadProduct === false) {
       dispatch(getProductById(id));
+      setLoadProduct(true);
     }
     setProductDetails(product);
   }, [status_product, dispatch]);

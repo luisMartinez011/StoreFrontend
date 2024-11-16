@@ -41,8 +41,13 @@ const authSlice = createSlice({
         state.data = action.payload;
         const token = action.payload.token;
         const userName = action.payload.name;
+        const idUser = action.payload.id;
+
+        // *Objetos a guardar en el local storage
         localStorage.setItem("authToken", token);
         localStorage.setItem("userName", userName);
+        localStorage.setItem("idUser", idUser);
+
       })
       .addCase(login.rejected, (state, action) => {
         state.status = false;

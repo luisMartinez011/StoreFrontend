@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
 
 const NavBar = () => {
-  const { cartList } = useSelector((state) => state.cart);
   const [expand, setExpand] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const [userName, setUserName] = useState("");
@@ -110,12 +109,7 @@ const NavBar = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <Link
-              aria-label="Go to Cart Page"
-              to="/cart"
-              className="cart"
-              data-num={cartList.length}
-            >
+            <Link aria-label="Go to Cart Page" to="/cart" className="cart">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -177,12 +171,7 @@ const NavBar = () => {
               {!userName ? LinkToAuth() : LogOutComponent()}
             </Nav.Item>
             <Nav.Item className="expanded-cart">
-              <Link
-                aria-label="Go to Cart Page"
-                to="/cart"
-                className="cart"
-                data-num={cartList.length}
-              >
+              <Link aria-label="Go to Cart Page" to="/cart" className="cart">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

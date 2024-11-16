@@ -1,27 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  decreaseQty,
-  deleteProduct,
-} from "../app/features/cart/cartSlice";
+
+import { getCartById } from "../app/actions/cartActions";
 
 const Cart = () => {
-  const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  // middlware to localStorage
-  const totalPrice = cartList.reduce(
-    (price, item) => price + item.qty * item.price,
-    0
-  );
+  const { status_cart, cart_data } = useSelector((state) => state.cart);
+  const [cartList2, setCartList] = useState([]);
+
+  // !Reemplazar estas variables
+  const cartList = [];
+  const totalPrice = 0;
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    // if(CartItem.length ===0) {
-    //   const storedCart = localStorage.getItem("cartItem");
-    //   setCartItem(JSON.parse(storedCart));
+    const token = localStorage.getItem("authToken");
+    const idUser = localStorage.getItem("idUser");
+    console.log("params", token, idUser);
+    // if (status_product === "idle") {
+    //   dispatch(getProductById(id));
     // }
-  }, []);
+    dispatch(getCartById({ token, idUser }));
+    setCartList(cart_data);
+    console.log(cart_data);
+  }, [status_cart, dispatch]);
+
   return (
     <section className="cart-items">
       <Container>
