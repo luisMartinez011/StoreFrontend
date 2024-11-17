@@ -44,6 +44,7 @@ function Auth() {
     const values = Object.fromEntries(formData);
 
     const data = {
+      name: values.name,
       email: values.email,
       password: values.password,
     };

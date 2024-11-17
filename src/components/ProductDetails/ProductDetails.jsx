@@ -10,9 +10,19 @@ const ProductDetails = ({ selectedProduct }) => {
   const dispatch = useDispatch();
   // const cartItemSelector = useSelector((state) => state.cart.status_post);
   const [quantity, setQuantity] = useState(1);
+  const [credentials, setCredentials] = useState({});
 
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const idUser = localStorage.getItem("idUser");
+    setCredentials({
+      token,
+      idUser,
+    });
+  }, []);
   const handleAdd = (selectedProduct, quantity) => {
-    const { token, idUser } = checkLocalStorage();
+    const { token, idUser } = credentials;
+    console.log(credentials);
     if (token == undefined || idUser == undefined) {
       toast.error(
         "Se necesita una cuenta para crear agregar productos al carrito."
@@ -39,13 +49,6 @@ const ProductDetails = ({ selectedProduct }) => {
       setQuantity(currentQuantity);
     }
   };
-
-  function checkLocalStorage() {
-    const token = localStorage.getItem("authToken");
-    const idUser = localStorage.getItem("idUser");
-
-    return { token, idUser };
-  }
 
   return (
     <section className="product-page">
