@@ -26,6 +26,8 @@ const Shop = () => {
     }
     setProducts(list_products);
   }, [status_list_products, dispatch]);
+
+  console.log(products);
   return (
     <Fragment>
       {/* <Banner title="product" /> */}

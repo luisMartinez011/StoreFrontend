@@ -12,10 +12,10 @@ const ProductCard = ({ productId, title, productItem }) => {
   const handelClick = () => {
     router(`/shop/${productItem.productId}`);
   };
-  const handelAdd = (productItem) => {
-    dispatch(addToCart({ product: productItem, num: 1 }));
-    toast.success("El producto ha sido añadido al carrito.");
-  };
+  // const handelAdd = (productItem) => {
+  //   dispatch(addToCart({ product: productItem, num: 1 }));
+  //   toast.success("El producto ha sido añadido al carrito.");
+  // };
   return (
     <Col md={3} sm={5} xs={10} className="product mtop">
       <img
@@ -29,23 +29,17 @@ const ProductCard = ({ productId, title, productItem }) => {
       </div>
       <div className="product-details">
         <h3 onClick={() => handelClick()}>{productItem.title}</h3>
-        <div className="rate">
-          <i className="fa fa-star"></i>
-          <i className="fa fa-star"></i>
-          <i className="fa fa-star"></i>
-          <i className="fa fa-star"></i>
-          <i className="fa fa-star"></i>
-        </div>
+
         <div className="price">
           <h4>${productItem.price}</h4>
-          <button
+          {/* <button
             aria-label="Add"
             type="submit"
             className="add"
             onClick={() => handelAdd(productItem)}
           >
             <ion-icon name="add"></ion-icon>
-          </button>
+          </button> */}
         </div>
       </div>
     </Col>
