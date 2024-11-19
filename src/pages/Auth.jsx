@@ -29,15 +29,15 @@ function Auth() {
     if (authSelector.status_login === "suceeded") {
       toast.success("Cuenta ingresada con exito");
       setTimeout(() => {
-        window.location.href = "/"; // Redirige a la página de inicio
-      }, 1000); // Puedes ajustar el tiempo de espera
+        window.location.href = "/";
+      }, 1000);
     }
 
     if (authSelector.status_register === "suceeded") {
       toast.success("Cuenta registrada con exito");
       setTimeout(() => {
-        window.location.href = "/"; // Redirige a la página de inicio
-      }, 1000); // Puedes ajustar el tiempo de espera
+        window.location.href = "/";
+      }, 1000);
     }
 
     if (authSelector.status_login == "error") {
