@@ -1,12 +1,9 @@
 import { Col } from "react-bootstrap";
 import "./product-card.css";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../app/features/cart/cartSlice";
 
 const ProductCard = ({ productId, title, productItem }) => {
-  const dispatch = useDispatch();
   const router = useNavigate();
 
   const handelClick = () => {
