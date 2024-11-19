@@ -14,14 +14,8 @@ const login = async (email,password) => {
       }
     }
   )
-  .then(response => {
-    const data = response.data;
-    return response.data;
-  })
-  .catch(error => {
-    return fail(error);
-  });
-  return response;
+
+  return response.data;
 }
 
 const register = async (name,email, password) => {
@@ -36,13 +30,7 @@ const register = async (name,email, password) => {
       }
     }
   )
-  .then(response => {
-    return response.data;
-  })
-  .catch(error => {
-    return fail(error);
-  });
-  return response;
+  return response.data;
 }
 
 

@@ -22,7 +22,6 @@ const ProductDetails = ({ selectedProduct }) => {
   }, []);
   const handleAdd = (selectedProduct, quantity) => {
     const { token, idUser } = credentials;
-    console.log(credentials);
     if (token == undefined || idUser == undefined) {
       toast.error(
         "Se necesita una cuenta para crear agregar productos al carrito."

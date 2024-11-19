@@ -14,6 +14,7 @@ import {
 import { login, register } from "../app/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Auth() {
   const [formType, setFormType] = useState("login");
@@ -25,11 +26,29 @@ function Auth() {
   const authSelector = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (authSelector.status === true) {
-      navigate("/");
-      window.location.reload();
+    if (authSelector.status_login === "suceeded") {
+      toast.success("Cuenta ingresada con exito");
+      setTimeout(() => {
+        window.location.href = "/"; // Redirige a la página de inicio
+      }, 1000); // Puedes ajustar el tiempo de espera
     }
-  }, [authSelector.status]);
+
+    if (authSelector.status_register === "suceeded") {
+      toast.success("Cuenta registrada con exito");
+      setTimeout(() => {
+        window.location.href = "/"; // Redirige a la página de inicio
+      }, 1000); // Puedes ajustar el tiempo de espera
+    }
+
+    if (authSelector.status_login == "error") {
+      toast.error("Cuenta no registrada o credenciales incorrectas");
+    }
+
+    if (authSelector.status_register == "error") {
+      toast.error("La cuenta ya esta registrada");
+    }
+  }, [authSelector.status_login, authSelector.status_register]);
+
   const handleJustifyClick = (value) => {
     if (value === formType) {
       return;
@@ -47,6 +66,7 @@ function Auth() {
       email: values.email,
       password: values.password,
     };
+    console.log("login component");
     dispatch(login(data));
   }
 
@@ -106,9 +126,9 @@ function Auth() {
             />
 
             <MDBBtn type="submit" className="mb-4 w-100">
-              <Link to="/">
+              <a href="/">
                 <span className="text-white">Iniciar sesion</span>
-              </Link>
+              </a>
             </MDBBtn>
           </form>
         </MDBTabsPane>
@@ -135,9 +155,9 @@ function Auth() {
               size="8"
             />
             <MDBBtn type="submit" className="mb-4 w-100">
-              <Link to="/">
+              <a href="/">
                 <span className="text-white">Registrarse</span>
-              </Link>
+              </a>
             </MDBBtn>
           </form>
         </MDBTabsPane>

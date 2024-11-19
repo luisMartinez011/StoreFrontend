@@ -30,7 +30,6 @@ const Cart = () => {
     const { token, idUser } = credentials;
     if (token && idUser) {
       dispatch(getCartById({ token, idUser }));
-      console.log("Carrito only", cart_data);
     }
     setCartItems(cart_data.cartItems);
 
